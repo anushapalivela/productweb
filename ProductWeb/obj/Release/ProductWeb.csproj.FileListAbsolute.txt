@@ -1,0 +1,4 @@
+g:\users\geethaji\documents\visual studio 2012\Projects\ProductWeb\ProductWeb\bin\ProductWeb.dll
+g:\users\geethaji\documents\visual studio 2012\Projects\ProductWeb\ProductWeb\bin\ProductWeb.pdb
+g:\users\geethaji\documents\visual studio 2012\Projects\ProductWeb\ProductWeb\obj\Release\ProductWeb.dll
+g:\users\geethaji\documents\visual studio 2012\Projects\ProductWeb\ProductWeb\obj\Release\ProductWeb.pdb
