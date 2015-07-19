@@ -3,7 +3,7 @@
     //$("#ddlSubCategory").change(function () {
     //    var CategoryId = $(this).children(":selected").attr("id");    
     //});  
-        $("#txtName").focus();
+        $("#ddlSubCategory").focus(); //Focus on the first item in the form
         $("#btnSubmit").click(function () {
             var product = new Product();
             product.Name = $("#txtName").val();
@@ -11,29 +11,59 @@
             product.Price = $("#txtPrice").val();
             product.Status = $("#ddlStatus").val();
             var CategoryId = $("#ddlSubCategory").children(":selected").attr("id");
+            alert(CategoryId);
             var message = "";
-            var status = $("lblMsg");
+            //var status = $("lblMsg");
             $("#txtName").removeClass('red');
             $("#txtPrice").removeClass('red');
             $("#ddlStatus").removeClass('red');
-            if ($("#txtName").val() == "") {
+            //if ($("ddlSubCategory").val() == undefined) {
+
+            //    message += "Please select a category";
+            //    $("ddlSubCategory").addClass('red');
+
+            //}
+            if (CategoryId == undefined)
+            {
+                message += "Please Select a category\n";
+                $("#ddlSubCategory").addClass('red');
+            }
+            if (product.Name == "")
+            {
                 message += "Please Enter Name\n";
                 $("#txtName").addClass('red');
             }
-            if ($("#txtPrice").val() == "") {
+            //if ($("#txtName").val() == "") {
+            //    message += "Please Enter Name\n";
+            //    $("#txtName").addClass('red');
+            //}
+            if (product.Price == "")
+            {
                 message += "Please Enter Price\n";
                 $("#txtPrice").addClass('red');
+
             }
-            if ($("#ddlStatus").val() == "0") {
-                message += "Please Enter Status\n";
+            //if ($("#txtPrice").val() == "") {
+            //    message += "Please Enter Price\n";
+            //    $("#txtPrice").addClass('red');
+            //}
+            if (product.Status == undefined)
+            {
+                message += "Please Enter Status";
                 $("#ddlStatus").addClass('red');
+
             }
+            //if ($("#ddlStatus").val() == undefined) {
+            //    message += "Please Enter Status\n";
+            //    $("#ddlStatus").addClass('red');
+            //}
+            
             if (message == "") {
-                $("#lblMsg").text("");
-                var prodname = $("#txtName").val();
-                var description = $("#txtDesc").val();
-                var price = $("#txtPrice").val();
-                var status = $("#ddlStatus").val();
+                
+                //var prodname = $("#txtName").val();
+                //var description = $("#txtDesc").val();
+                //var price = $("#txtPrice").val();
+                //var status = $("#ddlStatus").val();
                 $.ajax({
                     type: "POST",
                     url: "AddProduct.aspx?action=save",
@@ -41,10 +71,10 @@
                     data: { product: JSON.stringify(product),CategoryId:CategoryId },
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
                     success: function (msg) {
-                        // $("#lblMsg").text(msg);
+                       
                         alert(msg);
                         $("#form1").each(function () {
-                            this.reset();
+                            this.reset(); // reset form on success
 
                         });
                     },

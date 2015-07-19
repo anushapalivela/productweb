@@ -53,6 +53,43 @@ namespace ProductWeb.BusinessLogic
                 return response; 
                 
             }
+        public ProductSearchResponse GetAllProducts()
+        {
+            List<Product> products = new List<Product>();
+            productDataManager = new ProductDataManager();
+            DataSet ds = productDataManager.GetAllProducts();
+            ProductSearchResponse response = new ProductSearchResponse();
+            DataTable dt = new DataTable();
+            dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Product product = new Product();
+                    product.Id = Convert.ToInt32(dr["Id"]);
+                    product.Name = dr["Name"].ToString();
+                    product.Description = dr["Description"].ToString();
+                    product.Price = Convert.ToDecimal(dr["Price"]);
+                    product.Status = dr["Status"].ToString();
+                    product.Category = new Category();
+                    product.Category.CategoryName = Convert.ToString(dr["CategoryName"]);
+                    if (dr["CategoryId"] != System.DBNull.Value)
+                    {
+                        product.Category.CategoryId = Convert.ToInt32(dr["CategoryId"]);
+                    }
+                    products.Add(product);
+                }
+            }
+            // NoOfRows = dt.Rows.Count;
+            response.ProductList = products;
+            response.Count = Convert.ToInt32(ds.Tables[1].Rows[0][0]);
+            return response; 
+                
+
+           
+        
+        }
         public int UpdateProducts(Product product)
         {
             productDataManager = new ProductDataManager();

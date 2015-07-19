@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
         $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -15,7 +16,35 @@
             }
         }
  
-    });           
+        });
+        $("#btnCategory").click(function () {
+            var msg;
+            var Category = $("#ddlCategories").children(":selected").attr("id");
+            if (Category == undefined)
+            {
+                 msg = "Please select Category\n";
+            }
+            //alert(Category);
+            var Subcategory = $("#txtCategoryName").val();
+            if (Subcategory == "")
+            {
+
+                msg += "Please enter subcategory\n";
+            }
+
+            //alert(Subcategory);
+            var fileupload = $("#imgid").val();
+            //alert(fileupload);
+            if (fileupload == "")
+            {
+                msg += "please select a file to upload";
+            }
+            if (msg)                
+                alert(msg);
+            return true;
+
+
+        });
     function displayCategories(data)
     {
         for (var i = 0; i < data.length; i++) {
@@ -28,6 +57,7 @@
         var id = $(this).children(":selected").attr("id");
         $("#ValueHiddenField").val(id);
     });
+
     $("input:file").change(
         function (e) {
             var file = this.files;

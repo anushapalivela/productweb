@@ -12,6 +12,7 @@ namespace ProductWeb.Abstract
     {
        int InsertProduct(Product product);
        ProductSearchResponse GetProducts(int PageIndex);
+       ProductSearchResponse GetAllProducts();
        int UpdateProducts(Product product);
        int DeleteProducts(int Id);
        int InsertCategory(Category category);

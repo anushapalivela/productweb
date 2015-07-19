@@ -13,6 +13,15 @@ namespace ProductWeb {
     public partial class AddProduct {
         
         /// <summary>
+        /// uploadform control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm uploadform;
+        
+        /// <summary>
         /// txtCategoryName control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace ProductWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtCategoryName;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblError;
         
         /// <summary>
         /// ValueHiddenField control.

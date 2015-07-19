@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    $("#tbGetData").hide();
+    $("#tbGetData").hide(); //Hide the table on load
     $("#btnGetData").click(function () {
-        var Index = 1;//Default first Page
-        $("#tbGetData tbody").empty();
-        $("#paging a").remove();
+        var Index = 1;//Default Page index
+        $("#tbGetData tbody").empty(); //tbody of table is empty on load
+        $("#paging a").remove(); //Remove paging on load by selecting all the anchors elements that are descendants of div tag
         $.ajax({
             type: "POST",
             url: "AddProduct.aspx/BindDataTable",
@@ -62,25 +62,18 @@ function displayproducts(data) {
     $("#tbGetData").show();
     for (var i = 0; i < data.length; i++) {
         $("#tbGetData").append("<tr rowindex=" + data[i].Id + "><td>"+data[i].Category.CategoryName+"</td><td>" + data[i].Name + "</td><td>" + data[i].Description + "</td><td>" + data[i].Price + "</td><td>" + data[i].Status + "</td><td><button type='button' id='btnEdit'>Edit</button><button type='button' id='btnDelete'>Delete</button><button type='button' id='btnUpdate'>Save</button><button type='button' id='btnCancel'>Cancel</button></td></tr>");
-        //$('[id=btnUpdate]').hide();
-        //$('[id=btnCancel]').hide();
+    
        
     }
     $("[id=btnEdit]").on('click', (function () {
         var currentrow = $(this).closest('tr').find('td:eq(5)');
-        //currentrow.find('#btnEdit').hide();
-        //currentrow.find('#btnDelete').hide();
-        //currentrow.find('#btnUpdate').show();
-        //currentrow.find('#btnCancel').show();
-        //currentrow.find('td:eq(5)').append("<button type='button' id='btnUpdate'>Save</button>")
-        //currentrow.find('td:eq(5)').append("<button type='button' id='btnCancel'>Cancel</button>")
+        
         var ExistingCategory=$(this).closest('tr').find('td:eq(0)').text();
 
         categoryManager.loadSubCategories(undefined, $(this).parent().closest('tr').find('td:eq(0)'));
         //$(this).parent().closest('tr').find('td:eq(0)').append(dropdown);// html('<select id="ddlSubCategory"><option value="" disabled="disabled" selected="selected">--Select--</option></select>');
         $(this).parent().closest('tr').find('td:gt(0):lt(4)').each(function () {
-            //$(this).parent
-            // $(this).closest('tr').find('td:lt(4)').each(function () {
+            
             var existingVal = $(this).text();
             $(this).html('<input type="text" value="' + existingVal + '" >');
         });
@@ -92,10 +85,7 @@ function displayproducts(data) {
              });
 
              var currentrow = $(this).closest('tr').find('td:eq(5)');
-                //currentrow.find('#btnEdit').show();
-                //currentrow.find('#btnDelete').show();
-                //currentrow.find('#btnUpdate').hide();           
-                //$(this).hide();
+                
                 return false;
         }));
         $("[id=btnUpdate]").on('click', (function () {
@@ -108,8 +98,7 @@ function displayproducts(data) {
             product.Description = currentRow.find('td:eq(2)').find('input').val();
             product.Price = currentRow.find('td:eq(3)').find('input').val();
             product.Status = currentRow.find('td:eq(4)').find('input').val();
-            //product.Status = currentRow.find('td:eq(3)').find('input').val().toLowerCase();
-            //alert(status);
+            
             var message = "";
             if (SelectedCategoryName == "")
             {
@@ -136,10 +125,11 @@ function displayproducts(data) {
                 $.ajax({
                     type: "POST",
                     url: "AddProduct.aspx?action=update",
-                    data: { product: JSON.stringify(product),CategoryId:SelectedCategoryId },
+                    data: { product: JSON.stringify(product),CategoryId:SelectedCategoryId },//convert json object into JSON string
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
                     success: function (msg) {
                         alert(msg);
+
 
                     },
                     error: function (msg) {
@@ -152,11 +142,7 @@ function displayproducts(data) {
                     $(this).html("<label>").text(updatedVal);
                 });
                 var currentrow = $(this).closest('tr').find('td:eq(5)');
-                //currentrow.find('#btnUpdate').hide();
-                //currentrow.find('#btnCancel').hide();
-                //currentrow.find('#btnEdit').show();
-                //currentrow.find('#btnDelete').show();
-                //$(this).hide();
+                
             }
             else {
                 alert(message);
@@ -202,8 +188,3 @@ function Product(Id, Name, Description, Price, Status) {
 }
 
 
-//function sleep(ms) {
-//    var start = new Date().getTime(), expire = start + ms;
-//    while (new Date().getTime() < expire) { }
-//    return;
-//}

@@ -20,15 +20,10 @@ namespace ProductWeb
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //string name = Request.Params["name"];
-            //string description = Request.Params["description"];
-            //string status = Request.Params["status"];
-            //string price = Request.Params["price"];
-            //Object obj = Request.Params["product"];
             if (Request.Params["product"] != null)
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
-                Product product = serializer.Deserialize<Product>(Request.Params["product"]);
+                Product product = serializer.Deserialize<Product>(Request.Params["product"]);//convert json string into .net objects
                 if (Request.Params["CategoryId"] != null)
                 {
                     product.Category.CategoryId = Convert.ToInt32(Request.Params["CategoryId"]);
@@ -36,7 +31,7 @@ namespace ProductWeb
                 
                 if (Request.Params["action"] != null && Request.Params["action"] == "save")
                 {
-                    //SaveProduct(name, description, price, status);                 
+                                    
                     SaveProduct(product);
                 }
 
@@ -52,9 +47,18 @@ namespace ProductWeb
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 Product product = serializer.Deserialize<Product>(Request.Params["product"]);
-                if (Request.Params["CategoryId"] != null)
+                try
                 {
-                    product.Category.CategoryId = Convert.ToInt32(Request.Params["CategoryId"]);
+                    if (Request.Params["CategoryId"] != null)
+                    {
+                        product.Category.CategoryId = Convert.ToInt32(Request.Params["CategoryId"]);
+                    }
+                }
+                catch (InvalidCastException ex)
+                {
+
+                    throw new InvalidCastException("Category cannot be null", ex);
+                
                 }
                 if (Request.Params["action"] != null && Request.Params["action"] == "update")
                 {
@@ -77,52 +81,63 @@ namespace ProductWeb
             foreach(string file in Request.Files)
             {
                 Category category = new Category();
-                category.CategoryName = Convert.ToString(Request.Form["txtCategoryName"]);
-                string Category = Request.Form["ValueHiddenField"];
-                category.ParentId = Convert.ToInt32(Category);
-                //Request.Form["ddlCategories"]);
-                HttpPostedFile postedfile = Request.Files[file];               
-                string fileName = Path.GetFileName(postedfile.FileName);
-                string path = Path.Combine(Server.MapPath(System.Web.Configuration.WebConfigurationManager.AppSettings["filepath"].ToString()), fileName);                             
-                string filetype = postedfile.ContentType;
-                int fileSize = postedfile.ContentLength;
-                if (filetype != "image/gif" && filetype != "image/jpeg" && filetype != "image/png")
-                {
-                    System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Can upload only images')</SCRIPT>");
-                    
-                }              
-                else
-                {
-                    if (fileSize > 2097152)
+                
+                    if (Request.Form["txtCategoryName"] != "")
                     {
-                        System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Upload file less than 2mb')</SCRIPT>");
-
+                        category.CategoryName = Convert.ToString(Request.Form["txtCategoryName"]);
                     }
-                    else
-                    {
-                        postedfile.SaveAs(path);
-                        category.ImageName = fileName;
+                
+                
+                if (Request.Form["ValueHiddenField"] != null)
+                {
+                    string Category = Request.Form["ValueHiddenField"];
+                    category.ParentId = Convert.ToInt32(Category);
+                }
+               
+                if (Request.Files[file] != null)
+                {
+                    HttpPostedFile postedfile = Request.Files[file];
+                    string fileName = Path.GetFileName(postedfile.FileName);
+                    string path = Path.Combine(Server.MapPath(System.Web.Configuration.WebConfigurationManager.AppSettings["filepath"].ToString()), fileName);
+                    //string filetype = postedfile.ContentType;
+                    //int fileSize = postedfile.ContentLength;
+                    //if (filetype != "image/gif" && filetype != "image/jpeg" && filetype != "image/png")
+                    //{
+                    //    System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Can upload only images')</SCRIPT>");
+
+                    //}              
+                    //else
+                    //{
+                    //    if (fileSize > 2097152)
+                    //    {
+                    //        System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Upload file less than 2mb')</SCRIPT>");
+
+                    //    }
+                    //    else
+                    //    {
+                    postedfile.SaveAs(path);
+                    category.ImageName = fileName;
+                }
                         IProductManager productManager = ProductFactory.GetProductManager();
                         
-                        //document.getElementById('uploadform').reset();
-                        //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "reset", "<script type='text/javascript'>$(document).ready(function(){$('#uploadform')[0].reset();});</script>", false);
-                        //System.Web.HttpContext.Current.Response.ap();
+                        
                         int result = productManager.InsertCategory(category);
-                        Response.Clear();
+                       // Response.Clear();
                        
                         if (result > 0)
                         {
-                            Response.Write("Successfully Inserted");
+                            //Response.Write("Successfully Inserted");
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alertMessage", "alert('Record Inserted Successfully');", true);
 
                         }
                         else
                         {
                             Response.Write("Error while inserting data");
                         }
-                        Response.End();
+                        //Response.End();
                         
-                    }
-                }
+                   // }
+               // }
             }
         }
         //protected void btnSubmit_Click(object sender, EventArgs e)

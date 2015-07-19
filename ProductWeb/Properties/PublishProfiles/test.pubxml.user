@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/30/2014 16:15:17</publishTime>
     </File>
     <File Include="App_Data/Catalog.mdf">
-      <publishTime>01/30/2014 22:16:02</publishTime>
+      <publishTime>08/04/2014 19:08:52</publishTime>
     </File>
     <File Include="App_Data/Catalog_log.ldf">
-      <publishTime>01/30/2014 22:16:02</publishTime>
+      <publishTime>08/04/2014 19:08:52</publishTime>
     </File>
     <File Include="bin/ProductWeb.dll">
       <publishTime>01/30/2014 22:15:57</publishTime>

@@ -18,6 +18,10 @@ namespace ProductWeb.BusinessLogic
         {
             throw new NotImplementedException();
         }
+        public ProductSearchResponse GetAllProducts()
+        {
+            throw new NotImplementedException();
+        }
         public int UpdateProducts(Entities.Product product)
         {
             throw new NotImplementedException();

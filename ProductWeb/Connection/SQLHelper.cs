@@ -77,6 +77,7 @@ namespace ProductWeb.Connection
                 //if (HttpContext.Current.Cache["data"] == null)
                 //{
                     cmd.Connection = conn;
+                    cmd.Connection.Open();
                     cmd.CommandText = query;
                     cmd.CommandType = CommandType.StoredProcedure;                  
                     adapter.Fill(ds);
@@ -99,6 +100,7 @@ namespace ProductWeb.Connection
             }
             return ds; 
         }
+        
         public static int executeDeletequery(String query, SqlCommand cmd)
         {
             SqlConnection conn = new SqlConnection(constr);

@@ -28,6 +28,13 @@ namespace ProductWeb.DataAccess
             SQLHelper.executeInsertquery(query,cmd);
             return Convert.ToInt32(outparam.Value);           
         }
+        public DataSet GetAllProducts()
+        {
+            string query = "GetAllProducts";
+            SqlCommand cmd = new SqlCommand();
+            return SQLHelper.executeSelectquery(query, cmd);
+
+        }
         public DataSet GetProducts(int PageIndex)
         {
             string query = "SelectProducts";

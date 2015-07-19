@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html>
-<head runat="server">
+<head>
     <title></title>
     <%--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>--%>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -47,8 +47,8 @@
         </ul>
     </div>--%>
     <form id="form1">
-        <div style="align-content:center "width: 268px">
-            <table style="align-items:center">
+        <div>
+            <table>
                 <tr>
                     <td>Category</td>
                     <td><select id="ddlSubCategory"><option value="" disabled="disabled" selected="selected">--Select--</option></select></td>
@@ -88,7 +88,7 @@
             </table>
         </div>
     </form>
-    <form id="uploadform" method="post" enctype="multipart/form-data" target="uploading" action="AddProduct.aspx">
+    <form id="uploadform" method="post" runat="server" enctype="multipart/form-data" action="AddProduct.aspx">
     <div> 
         <table>
                 <tr><td>Categories</td>
@@ -99,6 +99,7 @@
                 <tr><td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" id="btnCategory"/>Submit</td></tr> 
            
         </table>             
+        <label id="lblError" runat="server"></label>
         <input type="hidden" id="ValueHiddenField" runat="server"/>  
          </div> 
        
