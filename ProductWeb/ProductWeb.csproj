@@ -74,7 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProduct.aspx" />
-    <Content Include="ajaxactions.aspx" />
     <Content Include="App_Data\Catalog.mdf" />
     <Content Include="App_Data\Catalog_log.ldf">
       <DependentUpon>Catalog.mdf</DependentUpon>
@@ -118,13 +117,6 @@
     </Compile>
     <Compile Include="AddProduct.aspx.designer.cs">
       <DependentUpon>AddProduct.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ajaxactions.aspx.cs">
-      <DependentUpon>ajaxactions.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ajaxactions.aspx.designer.cs">
-      <DependentUpon>ajaxactions.aspx</DependentUpon>
     </Compile>
     <Compile Include="BusinessLogic\ProductFactory.cs" />
     <Compile Include="BusinessLogic\ProductManager.cs" />
