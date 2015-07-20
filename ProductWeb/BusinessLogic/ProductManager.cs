@@ -10,7 +10,7 @@ using ProductWeb.Messages;
 
 namespace ProductWeb.BusinessLogic
 {
-    public class ProductManager : IProductManager
+    public class ProductSqlManager : IProductManager
     {
         ProductDataManager productDataManager;
         public int InsertProduct(Product product)

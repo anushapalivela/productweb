@@ -15,7 +15,7 @@ namespace ProductWeb.BusinessLogic
             switch (managerType)
             {
                 case "sql":
-                    productManager = new ProductManager();
+                    productManager = new ProductSqlManager();
                     break;
                 case "oracle":
                     productManager = new ProductOracleManager();
