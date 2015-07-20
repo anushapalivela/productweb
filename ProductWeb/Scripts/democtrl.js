@@ -1,7 +1,10 @@
 ﻿angular.module('demoapp', ['ngRoute', 'ui.bootstrap'])
 .controller('democtrl', function ($scope, $http, $modal) {
 
-    $scope.category = [{ Id: 0, text: 'Select' }, { Id: 7, text: 'Laptop' }, { Id: 8, text: 'DSLR Cameras' }, { Id: 9, text: 'Pendrives' }]
+    $scope.category = [{ Id: 0, text: 'Select' }, { Id: 5, text: 'Nokia' }, { Id: 6, text: 'Samsung' }, { Id: 7, text: 'Apple' }, 
+        { Id: 8, text: 'Dell' },{ Id: 9, text: 'Acer' },{ Id: 10, text: 'HP' },{ Id: 11, text: 'Canon' },{ Id: 12, text: 'Nikon' },
+    { Id: 13, text: 'Sharp' },{ Id: 14, text: 'Sony' }]
+    
     $scope.status = [{ text: 'Select' }, { text: 'In Stock' }, { text: 'Out Of Stock' }, { text: 'BackOrder' }];
     $scope.defaultstatus = $scope.status[0];
     $scope.defaultcategory = $scope.category[0].Id;
@@ -141,7 +144,10 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, $http) {
 
     $scope.item = items;
     console.log($scope.item);
-    $scope.category = [{ Id: 7, text: 'Laptop' }, { Id: 8, text: 'DSLR Cameras' }, { Id: 9, text: 'Pendrives' }];
+    $scope.category = [{ Id: 0, text: 'Select' }, { Id: 5, text: 'Nokia' }, { Id: 6, text: 'Samsung' }, { Id: 7, text: 'Apple' },
+      { Id: 8, text: 'Dell' }, { Id: 9, text: 'Acer' }, { Id: 10, text: 'HP' }, { Id: 11, text: 'Canon' }, { Id: 12, text: 'Nikon' },
+  { Id: 13, text: 'Sharp' }, { Id: 14, text: 'Sony' }]
+
     $scope.status = [{ Id: 0, text: 'In Stock' }, { Id: 1, text: 'Out of Stock' }, { Id: 2, text: 'Back Order' }];
 
     angular.forEach($scope.status, function (stat) {
