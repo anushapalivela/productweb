@@ -6,7 +6,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-route.js"></script>
-    <script src="http://localhost:63174/Scripts/ProductController.js"></script>
+    <!--<script src="http://localhost:63174/Scripts/ProductController.js"></script>-->
+    <script src="Scripts/ProductController.js"></script>
 </head>
 <body ng-controller="ProductController">
     <div>
@@ -65,8 +66,10 @@
                 <div class="form-group">
                     Category
                     <!--<input type="text" class="form-control" ng-model="item.Category.CategoryName" />-->
-                    <select class="form-control" ng-model="item.Category.CategoryId" ng-options="cat.Id as cat.text for cat in category"></select>
-                </div>
+                    <!--<select class="form-control" ng-model="item.Category.CategoryId" 
+                            ng-options="cat.Id as cat.text for cat in category"></select>-->
+                    <select class="form-control" ng-model="" ng-repeat="cat.CategoryId as cat.CategoryName for cat in new"></select>
+                 </div>
 
                 <div class="form-group">
                     Name
@@ -99,7 +102,7 @@
 
             <div class="form-group">
                 Category
-                <select class="form-control" ng-model="defaultcategory" ng-options="cat.Id as cat.text for cat in category"></select>
+                <select class="form-control" ng-model="defaultcategory" ng-options="cat.CategoryId as cat.CategoryName for cat in newcategory"></select>
             </div>
 
             <div class="form-group">

@@ -71,3 +71,5 @@ C:\Users\Anusha\Documents\Visual Studio 2013\Projects\demo\ProductWeb\ProductMVC
 C:\Users\Anusha\Documents\Visual Studio 2013\Projects\demo\ProductWeb\ProductMVC\obj\Debug\ProductMVC.csprojResolveAssemblyReference.cache
 C:\Users\Anusha\Documents\Visual Studio 2013\Projects\demo\ProductWeb\ProductMVC\obj\Debug\ProductMVC.dll
 C:\Users\Anusha\Documents\Visual Studio 2013\Projects\demo\ProductWeb\ProductMVC\obj\Debug\ProductMVC.pdb
+C:\Users\Anusha\Documents\Visual Studio 2013\Projects\demo\ProductWeb\ProductMVC\bin\EntityFramework.SqlServer.dll
+C:\Users\Anusha\Documents\Visual Studio 2013\Projects\demo\ProductWeb\ProductMVC\bin\EntityFramework.SqlServer.xml

@@ -5,10 +5,25 @@
     //    { Id: 8, text: 'Dell' },{ Id: 9, text: 'Acer' },{ Id: 10, text: 'HP' },{ Id: 11, text: 'Canon' },{ Id: 12, text: 'Nikon' },
     //{ Id: 13, text: 'Sharp' }, { Id: 14, text: 'Sony' }]
 
-    $http.get('api/Product/GetSubCategories').success(function (data)
+    $http.get('api/Product/SubCategories').success(function (data)
     {
-
+        
+        alert("In subcategories");
+        
         $scope.category = data;
+        console.log($scope.category);
+        $scope.new = $scope.category.CategoryList;
+       
+        console.log($scope.category.CategoryList);
+        //angular.forEach($scope.category.CategoryList, function (value, index) {
+        //    console(value.name);
+        
+        angular.forEach($scope.category.CategoryList, function (value, key) {
+            $scope.newcategory = value;
+            console.log($scope.newcategory);
+            
+        })
+      
 
     }).error(function(){
 
@@ -20,7 +35,9 @@
     
     $scope.status = [{ text: 'Select' }, { text: 'In Stock' }, { text: 'Out Of Stock' }, { text: 'BackOrder' }];
     $scope.defaultstatus = $scope.status[0];
-    $scope.defaultcategory = $scope.category[0].Id;
+    $scope.defaultcategory = [{ CategoryId: 0, CategoryName: 'Select' }];
+    console.log("Default"+$scope.defaultcategory);
+    //$scope.defaultcategory = "Select";
     $scope.submitted = false;
     $scope.gap = 5;
     $scope.currentPage = 0;
@@ -55,10 +72,10 @@
 
 
     };
-    $http.get('api/Product').success(function (data) {
+    $http.get('api/Product/GetAllProducts').success(function (data) {
 
         //$scope.product = {};
-
+        alert("Get PRoducts");
         $scope.productsglobal = data;
         //var begin = (($scope.currentPage) * $scope.itemsperpage);
         //var end = begin + $scope.itemsperpage;
@@ -73,7 +90,7 @@
 
         };
     }).error(function () {
-        alert("error")
+        alert("error in products")
     });
     //$scope.getProduct = function () {
     
@@ -117,7 +134,10 @@
         begin = (($scope.currentPage) * $scope.itemsperpage);
         end = begin + $scope.itemsperpage;
         //console.log(begin);
-       // console.log(end);
+        // console.log(end);
+        //console.log($scope.productsglobal);
+        //$scope.new = $scope.productsglobal.ProductList;
+        //console.log($scope.new);
         $scope.filteredproducts = $scope.productsglobal.ProductList.slice(begin, end);
         console.log($scope.filteredproducts);
     };
@@ -129,11 +149,11 @@
         //var data = { Id: productid };
         $http.delete('api/Product/' + productid).success(function () {
 
-            alert("Delete");
+            alert("Deleting products");
 
         }).error(function () {
 
-            alert("Error");
+            alert("Error while deleting");
         });
     };
     $scope.openProduct = function (product) {

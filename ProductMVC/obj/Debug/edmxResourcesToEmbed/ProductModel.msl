@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CatalogModelStoreContainer" CdmEntityContainer="CatalogEntities">
+    <FunctionImportMapping FunctionImportName="DeleteProducts" FunctionName="CatalogModel.Store.DeleteProducts" />
+    <FunctionImportMapping FunctionImportName="GetAllProducts" FunctionName="CatalogModel.Store.GetAllProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CatalogModel.GetAllProducts_Result">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="CatalogModel.Store.GetProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CatalogModel.GetProducts_Result">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCategory" FunctionName="CatalogModel.Store.InsertCategory" />
+    <FunctionImportMapping FunctionImportName="InsertProducts" FunctionName="CatalogModel.Store.InsertProducts" />
+    <FunctionImportMapping FunctionImportName="InsertUpdateDelete" FunctionName="CatalogModel.Store.InsertUpdateDelete">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CatalogModel.InsertUpdateDelete_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectCategories" FunctionName="CatalogModel.Store.SelectCategories">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CatalogModel.SelectCategories_Result">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectProducts" FunctionName="CatalogModel.Store.SelectProducts" />
+    <FunctionImportMapping FunctionImportName="UpdateProducts" FunctionName="CatalogModel.Store.UpdateProducts" />
+  </EntityContainerMapping>
+</Mapping>

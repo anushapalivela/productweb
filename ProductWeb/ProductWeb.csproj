@@ -119,7 +119,7 @@
       <DependentUpon>AddProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="BusinessLogic\ProductFactory.cs" />
-    <Compile Include="BusinessLogic\ProductManager.cs" />
+    <Compile Include="BusinessLogic\ProductSqlManager.cs" />
     <Compile Include="BusinessLogic\ProductMySqlManager.cs" />
     <Compile Include="BusinessLogic\ProductOracleManager.cs" />
     <Compile Include="Connection\SQLHelper.cs" />

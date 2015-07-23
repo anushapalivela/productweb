@@ -31,7 +31,8 @@ namespace ProductMVC.Controllers
 
         }
 
-        //[HttpGet]
+        [HttpGet]
+        [ActionName("GetAllProducts")]
         public ProductSearchResponse GetAllProducts()
         {
 
@@ -39,11 +40,13 @@ namespace ProductMVC.Controllers
             return productManager.GetAllProducts();
         }
 
-        public CategorySearchResponse GetSubCategories()
-        { 
-            IProductManager productManager=ProductFactory.GetProductManager();
-            return productManager.GetSubCategories();   
-        
+        [ActionName("SubCategories")]
+        [HttpGet]
+        public CategorySearchResponse SubCategories()
+        {
+            IProductManager productManager = ProductFactory.GetProductManager();
+            return productManager.GetSubCategories();
+
         }
         public void PutProduct(Product product)
         {
