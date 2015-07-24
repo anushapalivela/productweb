@@ -1,9 +1,10 @@
 ﻿angular.module('Productapp', ['ngRoute', 'ui.bootstrap'])
 .controller('ProductController', function ($scope, $http, $modal) {
 
-    //$scope.category = [{ Id: 0, text: 'Select' }, { Id: 5, text: 'Nokia' }, { Id: 6, text: 'Samsung' }, { Id: 7, text: 'Apple' }, 
+    //$scope.new = [{ Id: 0, text: 'Select' }, { Id: 5, text: 'Nokia' }, { Id: 6, text: 'Samsung' }, { Id: 7, text: 'Apple' }, 
     //    { Id: 8, text: 'Dell' },{ Id: 9, text: 'Acer' },{ Id: 10, text: 'HP' },{ Id: 11, text: 'Canon' },{ Id: 12, text: 'Nikon' },
     //{ Id: 13, text: 'Sharp' }, { Id: 14, text: 'Sony' }]
+    //console.log($scope.new);
 
     $http.get('api/Product/SubCategories').success(function (data)
     {
@@ -11,33 +12,47 @@
         alert("In subcategories");
         
         $scope.category = data;
-        console.log($scope.category);
-        $scope.new = $scope.category.CategoryList;
-       
-        console.log($scope.category.CategoryList);
-        //angular.forEach($scope.category.CategoryList, function (value, index) {
-        //    console(value.name);
         
-        angular.forEach($scope.category.CategoryList, function (value, key) {
-            $scope.newcategory = value;
-            console.log($scope.newcategory);
+        //$scope.newcategory = data.CategoryList;
+        ////var default = data.CategoryList[0];
+        ////console($scope.defaultcategory);
+        //console.log($scope.newcategory);
+        //$scope.new = function ()
+        //{
+        //    var defaultcategory = new function () {
+        //        this.CategoryId = 0;
+        //        this.CategoryName = 'Select';
+               
+        //    }
+        //    $scope.newcategory = $scope.newcategory.splice(0, 0, defaultcategory);
+        //    console.log($scope.newcategory);
+        //}
+        //console.log($scope.newcategory);
+        //angular.forEach($scope.category.CategoryList[0], function (value, index) {
+        //    console(value.CategoryName);
+        //})
+        //angular.forEach($scope.category.CategoryList, function (value, key) {
+        //    $scope.categoryarray = [];
+        //    $scope.newcategory += [{ Id: value.CategoryId, text: value.CategoryName }];
+        //    $scope.categoryarray.push($scope.newcategory);
             
-        })
+        //})
       
-
+        //console.log($scope.categoryarray);
     }).error(function(){
 
         alert("Error while loading Categries");
 
     });
 
-   
     
     $scope.status = [{ text: 'Select' }, { text: 'In Stock' }, { text: 'Out Of Stock' }, { text: 'BackOrder' }];
     $scope.defaultstatus = $scope.status[0];
-    $scope.defaultcategory = [{ CategoryId: 0, CategoryName: 'Select' }];
-    console.log("Default"+$scope.defaultcategory);
-    //$scope.defaultcategory = "Select";
+    //$scope.defaultcategory = [{ CategoryId: 0, CategoryName: 'Select' }];
+    //console.log("Default"+$scope.defaultcategory);
+    
+   // $scope.defaultcategory = [{ text: 'Select' }];
+    //console($scope.defaultcategory);
     $scope.submitted = false;
     $scope.gap = 5;
     $scope.currentPage = 0;
@@ -50,22 +65,14 @@
             //$scope.product.push({ categoryid: $scope.defaultcategory }, { name: $scope.newproductname }, { description: $scope.newdescription }, { price: $scope.newprice }, { status: $scope.defaultstatus });
             alert("Here");
             var data = { Name: $scope.newproductname, Description: $scope.newdescription, Category: { CategoryId: $scope.defaultcategory }, Price: $scope.newprice, Status: $scope.defaultstatus.text }
-            //$scope.product.Name = $scope.newproductname;
-            //$scope.product.Description = $scope.newdescription;
-            //$scope.product.Category = {};
-            //$scope.product.Category.CategoryId = $scope.defaultcategory;
-            //$scope.product.Price = $scope.newprice;
-            //$scope.product.Status = $scope.defaultstatus.text;
-
-
-            $http.post('api/Product', data).success(function () {
-                alert("success");
+             $http.post('api/Product', data).success(function () {
+                alert("successfully created product");
             }).error(function () {
-                alert("error");
+                alert("error while creating product");
             });
         }
         else {
-            alert("ERRRRRRRRRR");
+            alert("ERROR Form is Invalid");
             $scope.submitted = true;
 
         }
@@ -74,7 +81,7 @@
     };
     $http.get('api/Product/GetAllProducts').success(function (data) {
 
-        //$scope.product = {};
+        
         alert("Get PRoducts");
         $scope.productsglobal = data;
         //var begin = (($scope.currentPage) * $scope.itemsperpage);
@@ -139,7 +146,7 @@
         //$scope.new = $scope.productsglobal.ProductList;
         //console.log($scope.new);
         $scope.filteredproducts = $scope.productsglobal.ProductList.slice(begin, end);
-        console.log($scope.filteredproducts);
+        //console.log($scope.filteredproducts);
     };
     
 
@@ -190,22 +197,15 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, $http) {
     });
 
 
-    //$scope.CategoryId = items.Category.CategoryId;
-    //$scope.CategoryName = items.Category.CategoryName;
-    //$scope.Name = items.Name;
-    //$scope.Description = items.Description;
-    //$scope.Price = items.Price;
-    //$scope.Status = items.Status;
-
     $scope.save = function () {
         var data = { Id: $scope.item.Id, Name: $scope.item.Name, Description: $scope.item.Description, Category: { CategoryId: $scope.item.Category.CategoryId }, Price: $scope.item.Price, Status: $scope.item.currentStatus.text }
 
         console.log(data);
         $http.put('api/Product', data).success(function () {
-            alert("success");
+            alert("successfully updated product");
             $scope.cancel();
         }).error(function () {
-            alert("error");
+            alert("error while updating product");
         });
 
     };

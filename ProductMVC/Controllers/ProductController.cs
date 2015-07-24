@@ -15,16 +15,9 @@ namespace ProductMVC.Controllers
     public class ProductController : ApiController
     {
 
-        //private static List<Product> _products;
-
-        //[HttpPost]
         public void PostProduct(Product product)
         {
-            // Product product = new Product();
-            //if (_products == null)
-            //{
-            //    _products = new List<Product>();
-            //}
+            
             IProductManager productManager = ProductFactory.GetProductManager();
 
             product.Id = productManager.InsertProduct(product);
