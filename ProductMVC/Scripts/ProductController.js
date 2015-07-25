@@ -1,19 +1,15 @@
 ﻿angular.module('Productapp', ['ngRoute', 'ui.bootstrap'])
 .controller('ProductController', function ($scope, $http, $modal) {
 
-    //$scope.new = [{ Id: 0, text: 'Select' }, { Id: 5, text: 'Nokia' }, { Id: 6, text: 'Samsung' }, { Id: 7, text: 'Apple' }, 
-    //    { Id: 8, text: 'Dell' },{ Id: 9, text: 'Acer' },{ Id: 10, text: 'HP' },{ Id: 11, text: 'Canon' },{ Id: 12, text: 'Nikon' },
-    //{ Id: 13, text: 'Sharp' }, { Id: 14, text: 'Sony' }]
-    //console.log($scope.new);
+    
 
     $http.get('api/Product/SubCategories').success(function (data)
     {
         
-        alert("In subcategories");
-        
-        $scope.category = data;
-        
-        //$scope.newcategory = data.CategoryList;
+        //alert("In subcategories");
+        data.CategoryList.unshift({ CategoryId: -1, CategoryName: "Select" });
+        $scope.category = data.CategoryList;
+        $scope.defaultcategory = -1;
         ////var default = data.CategoryList[0];
         ////console($scope.defaultcategory);
         //console.log($scope.newcategory);
@@ -46,7 +42,7 @@
     });
 
     
-    $scope.status = [{ text: 'Select' }, { text: 'In Stock' }, { text: 'Out Of Stock' }, { text: 'BackOrder' }];
+    $scope.status = [{ text: 'Select' }, { text: 'In Stock' }, { text: 'Out of Stock' }, { text: 'Back Order' }];
     $scope.defaultstatus = $scope.status[0];
     //$scope.defaultcategory = [{ CategoryId: 0, CategoryName: 'Select' }];
     //console.log("Default"+$scope.defaultcategory);
@@ -60,10 +56,21 @@
     $scope.filteredproducts = [];
     $scope.addProduct = function () {
 
+        var isValid = true;
         if ($scope.formCreate.$valid) {
-
+            if ($scope.defaultcategory == -1) {
+                alert("Please select a category");
+                isValid = false;
+            }
+            if ($scope.defaultstatus.text == "Select") {
+                alert("Please select a status");
+                isValid = false;
+            }
+            if (!isValid) {
+                return false;
+            }
             //$scope.product.push({ categoryid: $scope.defaultcategory }, { name: $scope.newproductname }, { description: $scope.newdescription }, { price: $scope.newprice }, { status: $scope.defaultstatus });
-            alert("Here");
+            //alert("Here");
             var data = { Name: $scope.newproductname, Description: $scope.newdescription, Category: { CategoryId: $scope.defaultcategory }, Price: $scope.newprice, Status: $scope.defaultstatus.text }
              $http.post('api/Product', data).success(function () {
                 alert("successfully created product");
@@ -82,7 +89,7 @@
     $http.get('api/Product/GetAllProducts').success(function (data) {
 
         
-        alert("Get PRoducts");
+       // alert("Get PRoducts");
         $scope.productsglobal = data;
         //var begin = (($scope.currentPage) * $scope.itemsperpage);
         //var end = begin + $scope.itemsperpage;
@@ -171,7 +178,7 @@
             resolve: {
                 items: function () {
                     product.currentStatus = { text: product.Status };
-                    console.log(product);
+                    //console.log(product);
                     return product;
                     //console.log(product);
                 }
@@ -183,7 +190,7 @@
 var ModalInstanceCtrl = function ($scope, $modalInstance, items, $http) {
 
     $scope.item = items;
-    console.log($scope.item);
+    //console.log($scope.item);
     $scope.category = [{ Id: 0, text: 'Select' }, { Id: 5, text: 'Nokia' }, { Id: 6, text: 'Samsung' }, { Id: 7, text: 'Apple' },
       { Id: 8, text: 'Dell' }, { Id: 9, text: 'Acer' }, { Id: 10, text: 'HP' }, { Id: 11, text: 'Canon' }, { Id: 12, text: 'Nikon' },
   { Id: 13, text: 'Sharp' }, { Id: 14, text: 'Sony' }]
@@ -198,9 +205,24 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, $http) {
 
 
     $scope.save = function () {
+        var isValid = true;
+        if ($scope.item.Category.CategoryId == -1)
+        {
+            alert("Please select a category");
+            isValid = false;
+        }
+        if ($scope.item.currentStatus.text == "Select")
+        {
+            alert("Please select a status");
+            isValid = false;
+        }
+        if (!isValid)
+        {
+            return false;
+        }
         var data = { Id: $scope.item.Id, Name: $scope.item.Name, Description: $scope.item.Description, Category: { CategoryId: $scope.item.Category.CategoryId }, Price: $scope.item.Price, Status: $scope.item.currentStatus.text }
 
-        console.log(data);
+        //console.log(data);
         $http.put('api/Product', data).success(function () {
             alert("successfully updated product");
             $scope.cancel();

@@ -100,8 +100,8 @@
 
             <div class="form-group">
                 Category
-                <!--<select class="form-control" ng-model="select" ng-options="cat.CategoryId as cat.CategoryName for cat in newcategory"></select>-->
-                <select class="form-control" ng-options="cat.CategoryId as cat.CategoryName for cat in newcategory"><option value="">-- Select an option--</option></select>
+               
+                <select class="form-control" ng-model="defaultcategory" ng-options=" cat.CategoryId as cat.CategoryName for cat in category"><!--<option value="">-- Select an option--</option>--></select>
             </div>
 
             <div class="form-group">
@@ -128,7 +128,7 @@
                 <select class="form-control" ng-model="defaultstatus" ng-options="stat.text for stat in status"></select>
             </div>
 
-            <button type="submit" class="btn btn-default">AddProduct</button><!--<ng-click="addProduct()"-->
+            <button type="submit" class="btn btn-primary">AddProduct</button><!--<ng-click="addProduct()"-->
             <!--<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>AddProduct</button>-->
         </form>
     </div>
