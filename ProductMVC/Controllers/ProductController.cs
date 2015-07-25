@@ -17,6 +17,7 @@ namespace ProductMVC.Controllers
 
         public void PostProduct(Product product)
         {
+            //Add Products to database
             
             IProductManager productManager = ProductFactory.GetProductManager();
 
