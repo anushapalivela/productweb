@@ -50,6 +50,7 @@ namespace ProductMVC.Controllers
         }
         public void DeleteProduct(int productId)
         {
+            //404 error still working
             IProductManager productManager = ProductFactory.GetProductManager();
             productManager.DeleteProducts(productId);
 
