@@ -38,6 +38,7 @@ namespace ProductMVC.Controllers
         [HttpGet]
         public CategorySearchResponse SubCategories()
         {
+            //get category list
             IProductManager productManager = ProductFactory.GetProductManager();
             return productManager.GetSubCategories();
 
