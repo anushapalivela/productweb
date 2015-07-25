@@ -29,7 +29,7 @@ namespace ProductMVC.Controllers
         [ActionName("GetAllProducts")]
         public ProductSearchResponse GetAllProducts()
         {
-
+            //Added attribute level routing 
             IProductManager productManager = ProductFactory.GetProductManager();
             return productManager.GetAllProducts();
         }
